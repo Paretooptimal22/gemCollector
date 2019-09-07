@@ -18,13 +18,7 @@
     </div>
       
     <div class="row" id="gems">
-      <div class="col s4">
-        <div class="card">
-          <div class="card-image">
-            <img src="gem1.jpg">
-          </div>
-        </div>
-      </div>
+      
     </div>
       
       
@@ -34,7 +28,23 @@
   
   <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
   <script>
-    
+    const renderGems = () => {
+      document.getElementById(`gems`).innerHTML = ``
+      for (let i = 0; i < 3; i++) {
+        let gemElem = document.createElement(`div`)
+        gemElem.className = `col s4`
+        gemElem.innerHTML = `
+        <div class="card">
+          <div class="card-image">
+            <img class="gem" src="./gem${i + 1}.png">
+          </div>
+        </div>
+        `
+        document.getElementById(`gems`).append(gemElem)
+      }
+    }
+
+    renderGems()
   </script>
 </body>
 </html>
