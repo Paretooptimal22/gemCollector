@@ -55,23 +55,44 @@
       // display gems
       document.getElementById(`gems`).innerHTML = ``
       for (let i = 0; i < 3; i++) {
+        const random = Math.floor(Math.random() * 20) + 1
         let gemElem = document.createElement(`div`)
         gemElem.className = `col s4`
         gemElem.innerHTML = `
         <div class="card">
           <div class="card-image">
-            <img class="gem" src="./gem${i + 1}.png">
+            <img class="gem" src="./gem${i + 1}.png" data-value="${random}">
           </div>
         </div>
         `
         document.getElementById(`gems`).append(gemElem)
       }
+
+      // display game stats
+      document.getElementById(`goal`).textContent = goal
+      document.getElementById(`current`).textContent = current
+      document.getElementById(`wins`).textContent = wins
+      document.getElementById(`losses`).textContent = losses
     }
 
-    document.getElementById(`goal`).textContent = goal
-    document.getElementById(`current`).textContent = current
-    document.getElementById(`wins`).textContent = wins
-    document.getElementById(`losses`).textContent = losses
+    // on click event
+    document.addEventListener(`click`, event => {
+      if (event.target.className === `gem`) {
+        let gemValue = parseInt(event.target.dataset.value)
+        current += gemValue
+        if (current === goal) {
+          wins++
+          renderGems()
+        } else if (current > goal) {
+          losses++
+          renderGems()
+        } else {
+          document.getElementById(`current`).textContent = current
+        }
+      } 
+    })
+
+
 
     renderGems()
   </script>
